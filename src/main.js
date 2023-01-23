@@ -17,7 +17,7 @@ import { applyThemesOnElement } from 'custom-card-helpers';
 const viewButtons = [
   { label: "Month View", value: "dayGridMonth", iconPath: mdiViewModule },
   { label: "Week View", value: "dayGridWeek", iconPath: mdiViewWeek },
-  { label: "Day View", value: "dayGridDay", iconPath: mdiViewDay },
+  { label: "Day View", value: "timeGridWeek", iconPath: mdiViewDay },
   { label: "List View", value: "list", iconPath: mdiViewAgenda },
 ];
 
@@ -35,12 +35,12 @@ class FullCalendarCard extends LitElement {
 
     constructor() {
     	super();
-    	this._activeView = "dayGridMonth";
-    	this.initialView = "dayGridMonth";
+    	this._activeView = "timeGridWeek";
+    	this.initialView = "timeGridWeek";
     	this.views = [
     		"dayGridMonth",
     		"dayGridWeek",
-    		"dayGridDay",
+    		"timeGridWeek",
   		];
     }
     
@@ -493,8 +493,8 @@ class FullCalendarCard extends LitElement {
     	}
 
     	if (changedProps.has("narrow")) {
-      		this.views = this.narrow ? ["list", "dayGridMonth", "dayGridDay"] 
-      			: [ "dayGridMonth", "dayGridWeek", "dayGridDay"];
+      		this.views = this.narrow ? ["list", "dayGridMonth", "timeGridWeek"] 
+      			: [ "dayGridMonth", "dayGridWeek", "timeGridWeek"];
       		this.initialView = this.narrow ? "list" : "dayGridMonth";
       		this._activeView = this.initialView;
       		this.calendar.changeView(this._activeView);
