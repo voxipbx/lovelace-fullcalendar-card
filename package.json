@@ -1,0 +1,37 @@
+{
+  "name": "lovelace-full-calendar-card",
+  "private": true,
+  "version": "0.0.1",
+  "description": "Lovelace Full Calendar",
+  "scripts": {
+    "build": "webpack",
+    "watch": "webpack --watch --mode=development"
+  },
+  "repository": {
+    "type": "git",
+    "url": "github.com:gadgetchnnel/lovelace-full-calendar"
+  },
+  "author": "Steven Rollason",
+  "license": "MIT",
+  "devDependencies": {
+    "css-loader": "^3.5.2",
+    "lit-css-loader": "0.0.4",
+    "style-loader": "^1.1.4",
+    "to-string-loader": "^1.1.6",
+    "webpack": "^4.41.2",
+    "webpack-cli": "^3.3.10"
+  },
+  "main": "webpack.config.js",
+  "dependencies": {
+    "@fullcalendar/common": "5.1.0",
+    "@fullcalendar/core": "5.1.0",
+    "@fullcalendar/daygrid": "5.1.0",
+    "@fullcalendar/interaction": "5.1.0",
+    "@fullcalendar/list": "5.1.0",
+    "custom-card-helpers": "^1.9.0",
+    "lit-element": "^2.3.1",
+    "moment": "^2.29.4",
+    "tippy.js": "^6.2.2"
+  },
+  "keywords": []
+}
