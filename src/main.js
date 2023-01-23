@@ -26,7 +26,7 @@ const getListWeekRange = (currentDate) => {
   const startDate = new Date(currentDate.valueOf());
   const endDate = new Date(currentDate.valueOf());
 
-  endDate.setDate(endDate.getDate() + 7);
+  endDate.setDate(endDate.getDate() + 3);
 
   return { start: startDate, end: endDate };
 };
@@ -492,23 +492,6 @@ class FullCalendarCard extends LitElement {
       		return;
     	}
 
-    	if (changedProps.has("narrow")) {
-      		this.views = this.narrow ? ["list", "dayGridMonth", "timeGridWeek"] 
-      			: [ "dayGridMonth", "dayGridWeek", "timeGridWeek"];
-      		this.initialView = this.narrow ? "list" : "timeGridWeek";
-      		this._activeView = this.initialView;
-      		this.calendar.changeView(this._activeView);
-      		this.calendar.setOption("eventDisplay", this.narrow ? "list-item" : "auto");
-      		this.requestUpdate();
-    	}
-    	
-    	if (changedProps.has("views") && !this.views.includes(this._activeView)) {
-      		this._activeView = this.initialView && this.views.includes(this.initialView)
-          		? this.initialView
-          		: this.views[0];
-      		this.calendar.changeView(this._activeView);
-      		this.requestUpdate();
-    	}
     	
     	if (!this._config) {
       		return;
