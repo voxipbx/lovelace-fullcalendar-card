@@ -35,7 +35,7 @@ class FullCalendarCard extends LitElement {
 
     constructor() {
     	super();
-    	this._activeView = "timeGridWeek";
+    	this._activeView = "dayGridMonth";
     	this.initialView = "timeGridWeek";
     	this.views = [
     		"dayGridMonth",
@@ -495,7 +495,7 @@ class FullCalendarCard extends LitElement {
     	if (changedProps.has("narrow")) {
       		this.views = this.narrow ? ["list", "dayGridMonth", "timeGridWeek"] 
       			: [ "dayGridMonth", "dayGridWeek", "timeGridWeek"];
-      		this.initialView = this.narrow ? "list" : "dayGridMonth";
+      		this.initialView = this.narrow ? "list" : "timeGridWeek";
       		this._activeView = this.initialView;
       		this.calendar.changeView(this._activeView);
       		this.calendar.setOption("eventDisplay", this.narrow ? "list-item" : "auto");
@@ -532,6 +532,9 @@ class FullCalendarCard extends LitElement {
     		plugins: [dayGridPlugin, listPlugin, interactionPlugin],
     		//aspectRatio: this.isPanel ?  (portrait ? 0.4 : 2.5) : 1.35,
     		initialView: this.initialView,
+            slotDuration: '24:00',
+            nowIndicator: true,
+
     		locale: this._hass.language,
     		eventDisplay: "auto",
     		views: {
@@ -539,7 +542,11 @@ class FullCalendarCard extends LitElement {
       				visibleRange: getListWeekRange,
     			},
   			},
-    		headerToolbar: false,
+            headerToolbar: {
+                left: 'prev,next today',
+                center: 'title',
+                right: 'dayGridMonth,timeGridWeek,timeGridDay'
+            },
     		height: "parent",
     		eventTimeFormat: {
     			hour: 'numeric',
