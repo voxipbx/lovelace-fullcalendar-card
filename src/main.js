@@ -529,30 +529,16 @@ class FullCalendarCard extends LitElement {
 		tippy.setDefaultProps({ maxWidth: '', maxHeight: '' });
 		
 		this.calendar = new Calendar(calendarEl, {
-    		plugins: [dayGridPlugin, listPlugin, interactionPlugin],
-    		//aspectRatio: this.isPanel ?  (portrait ? 0.4 : 2.5) : 1.35,
-    		initialView: this.initialView,
-            slotDuration: '24:00',
-            nowIndicator: true,
-
-    		locale: this._hass.language,
-    		eventDisplay: "auto",
-    		views: {
-    			list: {
-      				visibleRange: getListWeekRange,
-    			},
-  			},
             headerToolbar: {
-                left: 'prev,next today',
-                center: 'title',
-                right: 'dayGridMonth,timeGridWeek,timeGridDay'
+                center: 'dayGridMonth,timeGridFourDay' // buttons for switching between views
             },
-    		height: "parent",
-    		eventTimeFormat: {
-    			hour: 'numeric',
-    			minute: '2-digit',
-    			hour12: false
-  			},
+            views: {
+                timeGridFourDay: {
+                type: 'timeGrid',
+                duration: { days: 4 },
+                buttonText: '4 day'
+                }
+            },
   			eventSources: this.getEventSources(),
   			windowResize: () => {
     			this.updateAspectRatio();
