@@ -9,13 +9,13 @@ class FullcalendarCard extends HTMLElement {
       card.appendChild(this.content);
       this.appendChild(card);
     }
-    this.entities=this.processConfigEntities(this.config.entities);
-    console.log(this.entities);
-    this.entities.forEach((a) => {
-      const state = hass.states[a.entityId].state;
+    const entities = this.processConfigEntities(this.config.entities);
+    console.log(entities);
+    entities.forEach((a) => {
+      const state = hass.states[a.entity].state;
+      console.log(hass.states[entity]);
       console.log(state);
     });
-    console.log(hass.states[entityId]);
     const entityId = this.config.entity;
     const state = hass.states[entityId].state;
 
