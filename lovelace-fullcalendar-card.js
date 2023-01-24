@@ -1,42 +1,42 @@
-class FullcalendarCard extends LitElement {
-  static get properties() {
-    return {
-      hass: { type: Object },
-      narrow: { type: Boolean },
-      route: { type: Object },
-      panel: { type: Object },
-    };
-  }
+class FullcalendarCard extends HTMLElement {
+  // Whenever the state changes, a new `hass` object is set. Use this to
+  // update your content.
+  set hass(hass) {
+    // Initialize the content if it's not there yet.
+    if (!this.content) {
+      this.innerHTML = `
+        <ha-card header="Example-card">
+          <div class="card-content"></div>
+        </ha-card>
+      `;
+      this.content = this.querySelector('div');
+    }
 
-  render() {
-    return html`
-      <wired-card elevation="2">
-        <p>There are ${Object.keys(this.hass.states).length} entities.</p>
-        <p>The screen is${this.narrow ? "" : " not"} narrow.</p>
-        Configured panel config
-        <pre>${JSON.stringify(this.panel.config, undefined, 2)}</pre>
-        Current route
-        <pre>${JSON.stringify(this.route, undefined, 2)}</pre>
-      </wired-card>
+    const entityId = this.config.entity;
+    const state = hass.states[entityId];
+    const stateStr = state ? state.state : 'unavailable';
+
+    this.content.innerHTML = `
+      The state of ${entityId} is ${stateStr}!
+      <br><br>
+      <img src="http://via.placeholder.com/350x150">
     `;
   }
 
-  static get styles() {
-    return css`
-      :host {
-        background-color: #fafafa;
-        padding: 16px;
-        display: block;
-      }
-      wired-card {
-        background-color: white;
-        padding: 16px;
-        display: block;
-        font-size: 18px;
-        max-width: 600px;
-        margin: 0 auto;
-      }
-    `;
+  // The user supplied configuration. Throw an exception and Home Assistant
+  // will render an error card.
+  setConfig(config) {
+    if (!config.entity) {
+      throw new Error('You need to define an entity');
+    }
+    this.config = config;
+  }
+
+  // The height of your card. Home Assistant uses this to automatically
+  // distribute all cards over the available columns.
+  getCardSize() {
+    return 3;
   }
 }
+
 customElements.define("fullcalendar-card", FullcalendarCard);
