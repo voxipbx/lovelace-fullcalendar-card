@@ -1,24 +1,74 @@
-import FullCalendar from "@fullcalendar/react";
-import timeGridPlugin from "@fullcalendar/timegrid";
-
-const events = [
-  { title: "event 1", start: "2023-01-24 10:10:00" },
-  { title: "event 2", start: "2023-01-24 11:00:00" },
-  { title: "event 3", start: "2023-01-24 11:15:00" },
-  { title: "event 4", start: "2023-01-24 11:20:00" },
-  { title: "event 5", start: "2023-01-24 12:10:00" },
-  { title: "event 6", start: "2023-01-24 13:10:00" },
-];
-
-const FullCalendarcore = () => {
-  return (
-    <FullCalendar
-      plugins={[timeGridPlugin]}
-      events={events}
-      initialView="timeGridDay"
-    />
-  );
-};
-
-export default FullCalendarcore;
-
+get calendarHtml(){const e=$d.filter(e=>this.views.includes(e.value));return j`<ha-card>
+      ${this.calendar?j`
+            <div class="header">
+              ${this.narrow?j`
+                    <div class="controls">
+                      <h1>
+                        ${this.calendar.view.title}
+                      </h1>
+                      <div>
+                        <ha-icon-button
+                          label=${this._hass.localize("ui.common.previous")}
+                          icon="hass:chevron-left"
+                          class="prev"
+                          @click=${this._handlePrev}
+                        >
+                        </ha-icon-button>
+                        <ha-icon-button
+                          label=${this._hass.localize("ui.common.next")}
+                          icon="hass:chevron-right"
+                          class="next"
+                          @click=${this._handleNext}
+                        >
+                        </ha-icon-button>
+                      </div>
+                    </div>
+                    <div class="controls">
+                      <mwc-button
+                        outlined
+                        class="today"
+                        @click=${this._handleToday}
+                        >Today</mwc-button
+                      >
+                      <ha-button-toggle-group
+                        .buttons=${e}
+                        .active=${this._activeView}
+                        @value-changed=${this._handleView}
+                      ></ha-button-toggle-group>
+                    </div>
+                  `:j`
+                    <div class="navigation">
+                      <mwc-button
+                        outlined
+                        class="today"
+                        @click=${this._handleToday}
+                        >Today</mwc-button
+                      >
+                      <ha-icon-button
+                        label=${this._hass.localize("ui.common.previous")}
+                        icon="hass:chevron-left"
+                        class="prev"
+                        @click=${this._handlePrev}
+                      >
+                      </ha-icon-button>
+                      <ha-icon-button
+                        label=${this._hass.localize("ui.common.next")}
+                        icon="hass:chevron-right"
+                        class="next"
+                        @click=${this._handleNext}
+                      >
+                      </ha-icon-button>
+                    </div>
+                    <h1>
+                      ${this.calendar.view.title}
+                    </h1>
+                    <ha-button-toggle-group
+                      .buttons=${e}
+                      .active=${this._activeView}
+                      @value-changed=${this._handleView}
+                    ></ha-button-toggle-group>
+                  `}
+            </div>
+          `:""}
+      <div id="calendar"></div></ha-card>
+    `}render()
