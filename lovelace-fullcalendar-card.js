@@ -12,21 +12,13 @@ class FullcalendarCard extends HTMLElement {
     const entities = this.processConfigEntities(this.config.entities);
     console.log(entities);
     entities.forEach((a) => {
-      const state = hass.states[a.entity];
-      console.log(hass.states[a.entity]);
-      console.log(state.state);
+      //const state = hass.states[a.entity];
+      //console.log(hass.states[a.entity]);
+      const state = hass.states[a.entity].state;
+      console.log(async_get_events(hass.states[a.entity]));
+      //console.log(state.state);
     });
-    const entityId = this.config.entity;
-    const state = hass.states[entityId].state;
-
-    if (state == 'off') {
-      this.content.innerHTML = '<i>none</i>';
-    }
-    else{
-      const tasksList = hass.states[entityId].attributes.all_tasks;
-
-      this.updateHtml(tasksList);
-    }
+    this.updateHtml(tasksList);
   }
 
   processConfigEntities(e) {
@@ -50,10 +42,6 @@ class FullcalendarCard extends HTMLElement {
     tasksList.forEach((task) => {
       this.content.innerHTML = this.formatTask(task);
     });
-  }
-
-  setConfig(config) {
-    this.config = config;
   }
 
 }
