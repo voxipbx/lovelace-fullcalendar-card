@@ -50,11 +50,7 @@ class FullcalendarCard extends HTMLElement {
   }
 
   setConfig(config) {
-    if (!config.entity) {
-      throw new Error('You need to define an entity');
-    }
     this.config = config;
-
   }
 
 }
