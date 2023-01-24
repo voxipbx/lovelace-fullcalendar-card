@@ -10,7 +10,7 @@ class FullcalendarCard extends HTMLElement {
       this.appendChild(card);
     }
     //this.entities=this.processConfigEntities(this._config.entities);
-    console.log(this._config.entities);
+    console.log(this.config.entities);
     console.log(this.entities);
     console.log(hass.states[entityId]);
     const entityId = this.config.entity;
