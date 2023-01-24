@@ -1,42 +1,55 @@
 class FullcalendarCard extends HTMLElement {
-  // Whenever the state changes, a new `hass` object is set. Use this to
-  // update your content.
   set hass(hass) {
-    // Initialize the content if it's not there yet.
     if (!this.content) {
-      this.innerHTML = `
-        <ha-card header="Example-card">
-          <div class="card-content"></div>
-        </ha-card>
-      `;
-      this.content = this.querySelector('div');
+      const card = document.createElement('ha-card');
+      card.header = this.config.title;
+      this.content = document.createElement('div');
+      this.content.style.padding = '16px 16px 16px';
+
+      card.appendChild(this.content);
+      this.appendChild(card);
     }
 
     const entityId = this.config.entity;
-    const state = hass.states[entityId];
-    const stateStr = state ? state.state : 'unavailable';
+    const state = hass.states[entityId].state;
 
-    this.content.innerHTML = `
-      The state of ${entityId} is ${stateStr}!
-      <br><br>
-      <img src="http://via.placeholder.com/350x150">
-    `;
+    if (state == 'off') {
+      this.content.innerHTML = '<i>none</i>';
+    }
+    else{
+      const tasksList = hass.states[entityId].attributes.all_tasks;
+
+      this.updateHtml(tasksList);
+    }
   }
 
-  // The user supplied configuration. Throw an exception and Home Assistant
-  // will render an error card.
+  formatTask(task) {
+    return this.content.innerHTML += `<div class=task>${task}</div>`;
+  }
+
+  updateHtml(tasksList) {
+    this.content.innerHTML = `
+      <style>
+        .task {
+          margin-bottom: 10px;
+          color: var(--text-color);
+          font: "var(--primary-font-family)";
+      </style>
+    `;
+
+    tasksList.forEach((task) => {
+      this.content.innerHTML = this.formatTask(task);
+    });
+  }
+
   setConfig(config) {
     if (!config.entity) {
       throw new Error('You need to define an entity');
     }
     this.config = config;
+
   }
 
-  // The height of your card. Home Assistant uses this to automatically
-  // distribute all cards over the available columns.
-  getCardSize() {
-    return 3;
-  }
 }
 
 customElements.define("fullcalendar-card", FullcalendarCard);
