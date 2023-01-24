@@ -2,7 +2,7 @@ const path = require('path');
 const webpack = require('webpack');
 
 module.exports = {
-  entry: './src/main.js',
+  entry: './src/index.js',
   mode: 'production',
   devtool: false,
   output: {
