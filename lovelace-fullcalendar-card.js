@@ -9,7 +9,10 @@ class FullcalendarCard extends HTMLElement {
       card.appendChild(this.content);
       this.appendChild(card);
     }
-
+    this.entities=this.processConfigEntities(this._config.entities)
+    processConfigEntities(this._config.entities)
+    console.log(this.entities);
+    console.log(hass.states[entityId]);
     const entityId = this.config.entity;
     const state = hass.states[entityId].state;
 
@@ -21,6 +24,10 @@ class FullcalendarCard extends HTMLElement {
 
       this.updateHtml(tasksList);
     }
+  }
+
+  processConfigEntities(e) {
+    if(!Array.isArray(e))throw new Error("Entities need to be an array");return e.map((e,t)=>{if("string"==typeof e)e={entity:e,eventColor:"#3788d8"};else{if("object"!=typeof e||Array.isArray(e))throw new Error(`Invalid entity specified at position ${t}.`);if(!e.entity)throw new Error(`Entity object at position ${t} is missing entity field.`)}return e})
   }
 
   formatTask(task) {
