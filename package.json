@@ -1,36 +1,31 @@
 {
   "name": "lovelace-full-calendar-card",
-  "private": true,
-  "version": "0.0.1",
-  "description": "Lovelace Full Calendar",
-  "scripts": {
-    "build": "webpack",
-    "watch": "webpack --watch --mode=development"
-  },
-  "repository": {
-    "type": "git",
-    "url": "github.com:gadgetchnnel/lovelace-full-calendar"
-  },
-  "author": "Steven Rollason",
-  "license": "MIT",
-  "devDependencies": {
-    "css-loader": "^3.5.2",
-    "lit-css-loader": "0.0.4",
-    "style-loader": "^1.1.4",
-    "to-string-loader": "^1.1.6",
-    "webpack": "^4.41.2",
-    "webpack-cli": "^3.3.10"
-  },
-  "main": "webpack.config.js",
+  "version": "1.0.0",
+  "description": "",
+  "keywords": [],
+  "main": "src/index.js",
   "dependencies": {
-    "@fullcalendar/common": "5.11.3",
-    "@fullcalendar/core": "5.11.3",
-    "@fullcalendar/timegrid": "5.11.3",
-    "@fullcalendar/interaction": "5.11.3",
-    "custom-card-helpers": "^1.9.0",
-    "lit-element": "^2.3.1",
-    "moment": "^2.29.4",
-    "tippy.js": "^6.2.2"
+    "@fullcalendar/core": "6.0.3",
+    "@fullcalendar/timegrid": "6.0.3",
+    "@fullcalendar/react": "6.0.3",
+    "react": "18.0.0",
+    "react-dom": "18.0.0",
+    "react-scripts": "4.0.0"
   },
-  "keywords": []
+  "devDependencies": {
+    "@babel/runtime": "7.13.8",
+    "typescript": "4.1.3"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
 }
